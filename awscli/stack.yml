@@ -696,3 +696,18 @@ Outputs:
         - !GetAtt 
           - WebServerInstance
           - PublicDnsName
+{
+    "Version":"2012-10-17",
+    "Statement":[{
+        "Effect":"Allow",
+        "Action":[
+            "cloudformation:CreateStack",
+            "cloudformation:DescribeStacks",
+            "cloudformation:DescribeStackEvents",
+            "cloudformation:DescribeStackResources",
+            "cloudformation:GetTemplate",
+            "cloudformation:ValidateTemplate"  
+        ],
+        "Resource":"*"
+    }]
+}
