@@ -10,6 +10,6 @@
             "cloudformation:GetTemplate",
             "cloudformation:ValidateTemplate"  
         ],
-        "Resource":"*"
+       "Resource":"arn:aws:cloudformation:us-east-1:362480651898:stack/mystack1/*"
     }]
 }
