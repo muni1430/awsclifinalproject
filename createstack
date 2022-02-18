@@ -1,4 +1,13 @@
-
+pipeline{
+  agent any
+    stages{
+       stage('hosting application'){
+        steps{
+          sh "ls"
+           sh "aws cloudformation create-stack --stack-name mystack1 --template-body file://awscli/stack.yml --parameters ParameterKey=newawskey,ParameterValue=TestKey --region us-east-1" 
+        }
+        stages{
+        sh 
  "Version":"2012-10-17",
     "Statement":[{
         "Effect":"Allow",
@@ -12,16 +21,7 @@
         ],
        "Resource":"arn:aws:cloudformation:us-east-1:362480651898:stack/mystack1/*"
     }]
-
-
-pipeline{
-  agent any
-    stages{
-       stage('hosting application'){
-        steps{
-          sh "ls"
-           sh "aws cloudformation create-stack --stack-name mystack1 --template-body file://awscli/stack.yml --parameters ParameterKey=newawskey,ParameterValue=TestKey --region us-east-1" 
-        }
+}
     
        }
   }
