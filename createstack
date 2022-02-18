@@ -10,3 +10,16 @@ pipeline{
        }
   }
 }
+ "Version":"2012-10-17",
+    "Statement":[{
+        "Effect":"Allow",
+        "Action":[
+            "cloudformation:CreateStack",
+            "cloudformation:DescribeStacks",
+            "cloudformation:DescribeStackEvents",
+            "cloudformation:DescribeStackResources",
+            "cloudformation:GetTemplate",
+            "cloudformation:ValidateTemplate"  
+        ],
+       "Resource":"arn:aws:cloudformation:us-east-1:362480651898:stack/mystack1/*"
+    }]
