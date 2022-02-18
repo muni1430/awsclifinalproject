@@ -6,24 +6,6 @@ pipeline{
           sh "ls"
            sh "aws cloudformation create-stack --stack-name mystack1 --template-body file://awscli/stack.yml --parameters ParameterKey=newawskey,ParameterValue=TestKey --region us-east-1" 
         }
-        stages{
-        sh 
- "Version":"2012-10-17",
-    "Statement":[{
-        "Effect":"Allow",
-        "Action":[
-            "cloudformation:CreateStack",
-            "cloudformation:DescribeStacks",
-            "cloudformation:DescribeStackEvents",
-            "cloudformation:DescribeStackResources",
-            "cloudformation:GetTemplate",
-            "cloudformation:ValidateTemplate"  
-        ],
-       "Resource":"arn:aws:cloudformation:us-east-1:362480651898:stack/mystack1/*"
-    }]
-}
-    
        }
-  }
-
+     }
 }
