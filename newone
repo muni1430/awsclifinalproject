@@ -10,6 +10,6 @@
             "cloudformation:GetTemplate",
             "cloudformation:ValidateTemplate"  
         ],
-       "Resource":"arn:aws:cloudformation:us-east-1:362480651898:stack/mystack1/*"
+       "Resource":"arn:aws:iam::123456789012:role/EC2-FullAccess"
     }]
 }
