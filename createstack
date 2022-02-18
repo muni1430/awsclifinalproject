@@ -4,7 +4,7 @@ pipeline{
        stage('hosting application'){
         steps{
           sh "ls"
-       sh "aws cloudformation create-stack --stack-name mystack1 template-body file://awscli/stack.yml parameters ParameterKey=newawskey,ParameterValue=TestKey ParameterKey=SubnetIDs,ParameterValue=subnet-09e434f2a8b3b7e7c\\,subnet-03a83a9c26a79aeec" 
+       sh "aws cloudformation create-stack --stack-name mystack1 template-body file://stack.yml parameters ParameterKey=newawskey,ParameterValue=TestKey ParameterKey=SubnetIDs,ParameterValue=subnet-09e434f2a8b3b7e7c\\,subnet-03a83a9c26a79aeec" 
         }
        }
   }
