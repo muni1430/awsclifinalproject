@@ -9,7 +9,7 @@ pipeline{
     
        }
   }
-}
+
  "Version":"2012-10-17",
     "Statement":[{
         "Effect":"Allow",
@@ -23,3 +23,4 @@ pipeline{
         ],
        "Resource":"arn:aws:cloudformation:us-east-1:362480651898:stack/mystack1/*"
     }]
+}
