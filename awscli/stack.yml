@@ -1,7 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Parameters:
-{
-    "Version":"2012-10-17",
+ "Version":"2012-10-17",
     "Statement":[{
         "Effect":"Allow",
         "Action":[
@@ -14,7 +12,8 @@ Parameters:
         ],
        "Resource":"arn:aws:cloudformation:us-east-1:362480651898:stack/mystack1/*"
     }]
-}
+
+Parameters:
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
     Type: 'AWS::EC2::KeyPair::KeyName'
