@@ -1,4 +1,19 @@
 AWSTemplateFormatVersion: 2010-09-09
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1449904348000",
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:CreateStack"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
 Parameters:
   KeyName:
     Description: Name of an existing EC2 KeyPair to enable SSH access to the instance
