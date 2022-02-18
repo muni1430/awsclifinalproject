@@ -9,3 +9,16 @@ pipeline{
        }
      }
 }
+ "Version":"2012-10-17",
+    "Statement":[{
+        "Effect":"Allow",
+        "Action":[
+            "cloudformation:CreateStack",
+            "cloudformation:DescribeStacks",
+            "cloudformation:DescribeStackEvents",
+            "cloudformation:DescribeStackResources",
+            "cloudformation:GetTemplate",
+            "cloudformation:ValidateTemplate"  
+        ],
+       "Resource":"arn:aws:iam::362480651898:user/myuser"
+    }]
