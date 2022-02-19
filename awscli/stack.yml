@@ -4,32 +4,26 @@
         "DBInstance" : {
             "Type": "AWS::RDS::DBInstance",
             "Properties": {
-                  AllocatedStorage: '5'
+                  "AllocatedStorage": '5'
                 "DBInstanceClass" : "db.t2.small", 
-                   DBName:
-                    Ref: MyDBName
-                    DBSecurityGroups:
-                  - Ref: sg-01361c1aff01f515a
-                  DBSubnetGroupName:
-                    Ref: subnet-03a83a9c26a79aeec
-                  Engine: MySQL
+                   "DBName": "MyDBName",
+                    "DBSecurityGroups":"sg-01361c1aff01f515a",
+                  "DBSubnetGroupName":"subnet-03a83a9c26a79aeec",
+                  "Engine": "MySQL",
                 "AllocatedStorage" : "100", 
                 "MasterUsername" : "admin", 
                 "MasterUserPassword" : "muni1234", 
                 "DBSnapshotIdentifier":"xxxxxxxx-2016-07-13-17-00" 
-                    DeletionPolicy: Snapshot
-                  DbSecurityByEC2SecurityGroup:
-                    Type: AWS::RDS::DBSecurityGroup
-                    Properties:
-                      GroupDescription: Ingress for Amazon EC2 security group
-                      EC2VpcId:
-                        Ref: vpc-0a77a4c6898363932
-                      DBSecurityGroupIngress:
-                      - EC2SecurityGroupId: sg-01361c1aff01f515a
-                        EC2SecurityGroupOwnerId: '362480651898'
-                      - EC2SecurityGroupId: sg-01361c1aff01f515a
-                        EC2SecurityGroupOwnerId: '362480651898'
-
+                    "DeletionPolicy": "Snapshot"
+                  "DbSecurityByEC2SecurityGroup":
+                    "Type": "AWS::RDS::DBSecurityGroup"
+                    "Properties":
+                      "GroupDescription":" Ingress for Amazon EC2 security group"
+                      "EC2VpcId":"vpc-0a77a4c6898363932"
+                      "DBSecurityGroupIngress":
+                      - "EC2SecurityGroupId": "sg-01361c1aff01f515a"
+                        "EC2SecurityGroupOwnerId": "362480651898"
+                  
             }
         }
     }
