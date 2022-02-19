@@ -1,15 +1,12 @@
- {
- "Version":"2012-10-17",
-    "Statement":[{
-        "Effect":"Allow",
-        "Action":[
-            "cloudformation:CreateStack",
-            "cloudformation:DescribeStacks",
-            "cloudformation:DescribeStackEvents",
-            "cloudformation:DescribeStackResources",
-            "cloudformation:GetTemplate",
-            "cloudformation:ValidateTemplate"  
-        ],
-       "Resource":"arn:aws:cloudformation:us-east-1:362480651898:stack/mystack1/*"
-    }]
-}
+{
+  "Version": "2008-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::362480651898:user/myuser"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
