@@ -4,7 +4,10 @@ pipeline{
        stage('hosting application'){
         steps{
           sh "ls"
-          "Version":"2012-10-17",
+           sh "aws cloudformation create-stack --stack-name mystack1 --template-body file://awscli/stack.yml --parameters ParameterKey=newawskey,ParameterValue=TestKey --region us-east-1" 
+        }
+       }
+       "Version":"2012-10-17",
     "Statement":[{
         "Effect":"Allow",
         "Action":[
@@ -17,9 +20,6 @@ pipeline{
         ],
        "Resource":"arn:aws:iam::362480651898:user/myuser"
     }]
-           sh "aws cloudformation create-stack --stack-name mystack1 --template-body file://awscli/stack.yml --parameters ParameterKey=newawskey,ParameterValue=TestKey --region us-east-1" 
-        }
-       }
      }
    }
       
