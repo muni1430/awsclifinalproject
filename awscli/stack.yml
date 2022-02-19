@@ -66,9 +66,9 @@ Resources:
               - !Ref PrivateSubnet02
             Tags: 
               - Key: Name
-                Value: eu-central-1-test-db-cluster
+                Value: us-east-1-test-db-cluster
               - Key: createdBy
-                Value: Maureen Barasa
+                Value: muni
               - Key: Project
                 Value: test-blog
               - Key: Environment
