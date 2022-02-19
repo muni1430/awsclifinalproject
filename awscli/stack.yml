@@ -5,40 +5,31 @@ Parameters:
   VPC:
     Type: String
     Description: The VPC to create the cluster
-    Default: vpc-0a77a4c6898363932
+    Default: vpc-6014600b
 
   PrivateSubnet01:
     Type: String
     Description: The subnet for the DB cluster
-    Default: subnet-03a83a9c26a79aeec
+    Default: subnet-ID
 
   PrivateSubnet02:
     Type: String
     Description: The subnet for the DB cluster
-    Default: subnet-09e434f2a8b3b7e7c
+    Default: subnet-ID
 
   MasterUsername:
     Type: String
     Description: The username for our database.
-    MinLength: 1
-    MaxLength: 41
-    AllowedPattern: ^[a-zA-Z0-9]*$
-    Default: admin
-    
+  
   MasterUserPassword:
     Type: String
     Description: The password for the database.
-    MinLength: 1
-    MaxLength: 41
-    AllowedPattern: ^[a-zA-Z0-9]*$
     "NoEcho": true
-    Default: muni1234
-    
-   myKeyPair: 
-    Description: Amazon EC2 Key Pair
+
+  ParameterGroup:
     Type: String
- 
-    
+    Description: The name of the database parameter group created.
+
 Resources:
     EC2SecurityGroup:
         Type: "AWS::EC2::SecurityGroup"
@@ -66,9 +57,9 @@ Resources:
               - !Ref PrivateSubnet02
             Tags: 
               - Key: Name
-                Value: us-east-1-test-db-cluster
+                Value: us-east-2-test-db-cluster
               - Key: createdBy
-                Value: muni
+                Value: Naresh
               - Key: Project
                 Value: test-blog
               - Key: Environment
@@ -79,10 +70,10 @@ Resources:
         Properties:
             DBInstanceIdentifier: aws-dxl-database-1
             AllocatedStorage: 100
-            DBInstanceClass: db.m5.large
+            DBInstanceClass: db.t2.micro
             Engine: "MYSQL"
-            MasterUsername: admin
-            MasterUserPassword: muni1234
+            MasterUsername: !Ref MasterUsername
+            MasterUserPassword: !Ref MasterUserPassword
             BackupRetentionPeriod: 7
             MultiAZ: true
             EngineVersion: 8.0.20
@@ -108,7 +99,7 @@ Resources:
               - Key: Name
                 Value: aws-dxl-database-1
               - Key: createdBy
-                Value: Maureen Barasa
+                Value: Naresh
               - Key: Project
                 Value: test-blog
               - Key: Environment
