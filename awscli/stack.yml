@@ -18,11 +18,11 @@ Parameters:
     Default: subnet-064e2a2a8efd8daf1
 
   MasterUsername:
-    Type: String
+    Type: admin
     Description: The username for our database.
   
   MasterUserPassword:
-    Type: String
+    Type: muni1234
     Description: The password for the database.
     "NoEcho": true
 
