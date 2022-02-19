@@ -20,15 +20,24 @@ Parameters:
   MasterUsername:
     Type: String
     Description: The username for our database.
+    MinLength: 1
+    MaxLength: 41
+    AllowedPattern: ^[a-zA-Z0-9]*$
   
   MasterUserPassword:
     Type: String
     Description: The password for the database.
+    MinLength: 1
+    MaxLength: 41
+    AllowedPattern: ^[a-zA-Z0-9]*$
     "NoEcho": true
 
   ParameterGroup:
     Type: String
     Description: The name of the database parameter group created.
+ myKeyPair: 
+    Description: Amazon EC2 Key Pair
+    Type: "AWS::EC2::KeyPair::newawskey"
 
 Resources:
     EC2SecurityGroup:
