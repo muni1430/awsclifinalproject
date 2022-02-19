@@ -34,9 +34,8 @@ Parameters:
     "NoEcho": true
     Default: muni1234
 
-  ParameterGroup:
-    Type: String
-    Description: The name of the database parameter group created.
+ 
+    
 Resources:
     EC2SecurityGroup:
         Type: "AWS::EC2::SecurityGroup"
