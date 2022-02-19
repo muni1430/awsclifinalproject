@@ -34,9 +34,9 @@ Parameters:
     "NoEcho": true
     Default: muni1234
     
-  myKeyPair: 
+   myKeyPair: 
     Description: Amazon EC2 Key Pair
-    Type: "AWS::EC2::KeyPair::newawskey"
+    Type: String
  
     
 Resources:
