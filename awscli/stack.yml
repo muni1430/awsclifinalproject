@@ -4,7 +4,7 @@
         "DBInstance" : {
             "Type": "AWS::RDS::DBInstance",
             "Properties": {
-                "DBInstanceClass" : "db.m2.xlarge", 
+                "DBInstanceClass" : "db.t2.small", 
                 "AllocatedStorage" : "100", 
                 "MasterUsername" : "admin", 
                 "MasterUserPassword" : "muni1234", 
