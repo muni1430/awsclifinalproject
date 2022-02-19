@@ -35,10 +35,6 @@ Parameters:
   ParameterGroup:
     Type: String
     Description: The name of the database parameter group created.
- myKeyPair: 
-    Description: Amazon EC2 Key Pair
-    Type: "AWS::EC2::KeyPair::newawskey"
-
 Resources:
     EC2SecurityGroup:
         Type: "AWS::EC2::SecurityGroup"
