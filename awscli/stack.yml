@@ -23,7 +23,8 @@ Parameters:
     MinLength: 1
     MaxLength: 41
     AllowedPattern: ^[a-zA-Z0-9]*$
-  
+    Default: admin
+    
   MasterUserPassword:
     Type: String
     Description: The password for the database.
@@ -31,6 +32,7 @@ Parameters:
     MaxLength: 41
     AllowedPattern: ^[a-zA-Z0-9]*$
     "NoEcho": true
+    Default: muni1234
 
   ParameterGroup:
     Type: String
@@ -77,8 +79,8 @@ Resources:
             AllocatedStorage: 100
             DBInstanceClass: db.m5.large
             Engine: "MYSQL"
-            MasterUsername: !Ref MasterUsername
-            MasterUserPassword: !Ref MasterUserPassword
+            MasterUsername: admin
+            MasterUserPassword: muni1234
             BackupRetentionPeriod: 7
             MultiAZ: true
             EngineVersion: 8.0.20
