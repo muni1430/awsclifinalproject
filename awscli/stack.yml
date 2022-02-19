@@ -5,17 +5,17 @@ Parameters:
   VPC:
     Type: String
     Description: The VPC to create the cluster
-    Default: vpc-6014600b
+    Default: vpc-0a77a4c6898363932
 
   PrivateSubnet01:
     Type: String
     Description: The subnet for the DB cluster
-    Default: subnet-ID
+    Default: subnet-03a83a9c26a79aeec
 
   PrivateSubnet02:
     Type: String
     Description: The subnet for the DB cluster
-    Default: subnet-ID
+    Default: subnet-064e2a2a8efd8daf1
 
   MasterUsername:
     Type: String
@@ -69,7 +69,7 @@ Resources:
         Type: AWS::RDS::DBInstance
         Properties:
             DBInstanceIdentifier: aws-dxl-database-1
-            AllocatedStorage: 100
+            AllocatedStorage: 10
             DBInstanceClass: db.t2.micro
             Engine: "MYSQL"
             MasterUsername: !Ref MasterUsername
