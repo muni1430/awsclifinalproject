@@ -1,59 +1,47 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Description: Template to Create an EC2 instance in a VPC
-   
-Parameters:
-  VpcId:
-    Type: String
-    Description: VPC id
-    Default: vpc-0a77a4c6898363932
-  ImageId:
-    Type: String
-    Description: ''
-    Default: 'ami-04505e74c0741db8d'
-  InstanceType:
-    Type: String
-    Description: Choosing  t2 micro because it is free
-    Default: t2.micro
-  KeyName:
-    Description: SSH Keypair to login to the instance
-    Type: AWS::EC2::KeyPair::KeyName
-    Default: newawskey
-
+AWSTemplateFormatVersion: 2010-09-09
+Metadata:
+  'AWS::CloudFormation::Designer':
+    8b08424b-41a3-4759-9251-82ec29a0e533:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 270
+        'y': 40
+      z: 0
+      dependson:
+        - 1412fe24-a829-42f7-9b92-392733c27585
+    1412fe24-a829-42f7-9b92-392733c27585:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 410
+        'y': 40
+      z: 0
 Resources:
-  DemoInstance:
-    Type: 'AWS::EC2::Instance'
+  ASASG6UQ3:
+    Type: 'AWS::AutoScaling::AutoScalingGroup'
     Properties: 
-      ImageId: !Ref ImageId
-      InstanceType: !Ref InstanceType
-      KeyName: !Ref KeyName
-      SecurityGroupIds: 
-        - !Ref DemoSecurityGroup
-      UserData:
-        Fn::Base64: 
-          !Sub |
-            #!/bin/bash
-            sudo apt-get update -y
-            sudo apt-get upgrade -y
-            sudo apt install apache2 -y
-  DemoSecurityGroup:
-    Type: 'AWS::EC2::SecurityGroup'
-    Properties:
-      VpcId: !Ref VpcId
-      GroupDescription: SG to allow SSH access via port 22
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: '22'
-          ToPort: '22'
-          CidrIp: '0.0.0.0/0'
-        - IpProtocol: all
-          FromPort: 80
-          ToPort: 80
-          CidrIp: 0.0.0.0/0
-      Tags:
-        - Key: Name
-          Value: EC2-SG
-Outputs:
-  DemoInstanceId:
-    Description: Instance Id 
-    Value: !Ref DemoInstance
-
+       AutoScalingGroupName: myasg1
+       AvailabilityZones: 
+        - us-east-1a
+       DesiredCapacity: 1        
+       LaunchConfigurationName:
+        Ref: mylc1
+        MaxSize: 1
+        MinSize: 0
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 8b08424b-41a3-4759-9251-82ec29a0e533
+    DependsOn:
+      - ASLC4ERMQ
+  ASLC4ERMQ:
+    Type: 'AWS::AutoScaling::LaunchConfiguration'
+    Properties: 
+       ImageId: ami-04505e74c0741db8d
+       InstanceType: t2.micro
+       LaunchConfigurationName: mylc1
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 1412fe24-a829-42f7-9b92-392733c27585
