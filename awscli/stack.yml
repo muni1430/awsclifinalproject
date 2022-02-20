@@ -70,7 +70,7 @@ Resources:
       MasterUserPassword: muni1234
       DBInstanceClass: db.t2.micro
       DBName: cwmsdbs
-      DBInstanceIdentifier: rds
+      DBInstanceIdentifier: rdsnew
       VPCSecurityGroups:
         - sg-01361c1aff01f515a
       EngineVersion: 5.7
@@ -138,7 +138,7 @@ Resources:
   ASASG3CEB8:
     Type: 'AWS::AutoScaling::AutoScalingGroup'
     Properties:
-      AutoScalingGroupName: my-asg new
+      AutoScalingGroupName: my-asg-new
       LaunchConfigurationName: my-lc1
       AvailabilityZones:
         - us-east-1a
