@@ -1,47 +1,154 @@
 AWSTemplateFormatVersion: 2010-09-09
 Metadata:
   'AWS::CloudFormation::Designer':
-    8b08424b-41a3-4759-9251-82ec29a0e533:
+    5a49fac4-991e-4070-916c-5e2a0b1311bd:
       size:
         width: 60
         height: 60
       position:
-        x: 270
-        'y': 40
+        x: 198
+        'y': 99
       z: 0
+      embeds: []
+    fef8a509-ced8-430b-81d1-a353eb3cbb59:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 315
+        'y': 97
+      z: 0
+      embeds: []
+    b943b41c-78a1-4c80-b3ab-ea3c57fca06f:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 461
+        'y': 104
+      z: 0
+      embeds: []
+    f135fd8f-ac4f-48ab-8ad3-5625d0c5d2ad:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 586
+        'y': 105
+      z: 0
+      embeds: []
       dependson:
-        - 1412fe24-a829-42f7-9b92-392733c27585
-    1412fe24-a829-42f7-9b92-392733c27585:
+        - fef8a509-ced8-430b-81d1-a353eb3cbb59
+        - b943b41c-78a1-4c80-b3ab-ea3c57fca06f
+    355e45e0-9d36-49a7-8d8d-fc3b7f760b9c:
       size:
         width: 60
         height: 60
       position:
-        x: 410
-        'y': 40
+        x: 708
+        'y': 99
       z: 0
+      embeds: []
+    1453d6ad-0801-4957-a2f6-c9cc5887b06b:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 843
+        'y': 100
+      z: 0
+      embeds: []
+      dependson:
+        - b943b41c-78a1-4c80-b3ab-ea3c57fca06f
 Resources:
-  ASASG6UQ3:
-    Type: 'AWS::AutoScaling::AutoScalingGroup'
-    Properties: 
-       AutoScalingGroupName: "myasg"
-       AvailabilityZones: 
-        - us-east-1a
-       DesiredCapacity: 1        
-       LaunchConfigurationName:
-        Ref: "mylc"
-        MaxSize: 1
-        MinSize: 0
+  RDSDBI32QQE:
+    Type: 'AWS::RDS::DBInstance'
+    Properties:
+      AllocatedStorage: 10
+      Engine: MySQL
+      MasterUsername: admin
+      MasterUserPassword: muni1234
+      DBInstanceClass: db.t2.micro
+      DBName: cwmsdbs
+      DBInstanceIdentifier: rds
+      VPCSecurityGroups:
+        - sg-01361c1aff01f515a
+      EngineVersion: 5.7
+      PubliclyAccessible: true
     Metadata:
       'AWS::CloudFormation::Designer':
-        id: 8b08424b-41a3-4759-9251-82ec29a0e533
+        id: 5a49fac4-991e-4070-916c-5e2a0b1311bd
+  ELBV2LB1HUDC:
+    Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+    Properties:
+      Name: my-load-balancer new
+      Subnets:
+        - subnet-09e434f2a8b3b7e7c
+        - subnet-03a83a9c26a79aeec
+      Type: network
+      IpAddressType: ipv4
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: fef8a509-ced8-430b-81d1-a353eb3cbb59
+  ELBV2TG4A6L0:
+    Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
+    Properties:
+      Name: my-target-group new
+      Port: 80
+      Protocol: TCP
+      VpcId: vpc-0a77a4c6898363932
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: b943b41c-78a1-4c80-b3ab-ea3c57fca06f
+  ELBV2L42QE:
+    Type: 'AWS::ElasticLoadBalancingV2::Listener'
+    Properties:
+      LoadBalancerArn: !Ref ELBV2LB1HUDC
+      Port: 80
+      Protocol: TCP
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref ELBV2TG4A6L0
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: f135fd8f-ac4f-48ab-8ad3-5625d0c5d2ad
     DependsOn:
-      - ASLC4ERMQ
-  ASLC4ERMQ:
+      - ELBV2LB1HUDC
+      - ELBV2TG4A6L0
+  ASLC55LJA:
     Type: 'AWS::AutoScaling::LaunchConfiguration'
-    Properties: 
-       ImageId: ami-04505e74c0741db8d
-       InstanceType: t2.micro
-       LaunchConfigurationName: "mylc"
+    Properties:
+      LaunchConfigurationName: my-lc1
+      ImageId: ami-04505e74c0741db8d
+      InstanceType: t2.micro
+      IamInstanceProfile: myiam_role
+      KeyName: newawskey
+      SecurityGroups:
+        - sg-01361c1aff01f515a
+      UserData:
+        'Fn::Base64': !Sub 
+            |
+            #!/bin/bash
+            sudo apt-get update -y
+            sudo apt-get upgrade -y
+            sudo apt-get install apache2 -y
     Metadata:
       'AWS::CloudFormation::Designer':
-        id: 1412fe24-a829-42f7-9b92-392733c27585
+        id: 355e45e0-9d36-49a7-8d8d-fc3b7f760b9c
+  ASASG3CEB8:
+    Type: 'AWS::AutoScaling::AutoScalingGroup'
+    Properties:
+      AutoScalingGroupName: my-asg new
+      LaunchConfigurationName: my-lc1
+      AvailabilityZones:
+        - us-east-1a
+      DesiredCapacity: 1
+      MaxSize: 2
+      MinSize: 1
+      TargetGroupARNs:
+        - !Ref ELBV2TG4A6L0
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 1453d6ad-0801-4957-a2f6-c9cc5887b06b
+    DependsOn:
+      - ELBV2TG4A6L0
