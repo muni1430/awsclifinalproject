@@ -23,12 +23,12 @@ Resources:
   ASASG6UQ3:
     Type: 'AWS::AutoScaling::AutoScalingGroup'
     Properties: 
-       AutoScalingGroupName: myasg1
+       AutoScalingGroupName: myasg
        AvailabilityZones: 
         - us-east-1a
        DesiredCapacity: 1        
        LaunchConfigurationName:
-        Ref: mylc1
+        Ref: mylc
         MaxSize: 1
         MinSize: 0
     Metadata:
@@ -41,7 +41,7 @@ Resources:
     Properties: 
        ImageId: ami-04505e74c0741db8d
        InstanceType: t2.micro
-       LaunchConfigurationName: mylc1
+       LaunchConfigurationName: mylc
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 1412fe24-a829-42f7-9b92-392733c27585
