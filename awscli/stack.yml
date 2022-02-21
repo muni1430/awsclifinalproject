@@ -118,7 +118,7 @@ Resources:
   ASLC55LJA:
     Type: 'AWS::AutoScaling::LaunchConfiguration'
     Properties:
-      LaunchConfigurationName: my-lcs1
+      LaunchConfigurationName: my-lc-new
       ImageId: ami-04505e74c0741db8d
       InstanceType: t2.micro
       IamInstanceProfile: myiam_role
@@ -168,7 +168,7 @@ Resources:
     Type: 'AWS::AutoScaling::AutoScalingGroup'
     Properties:
       AutoScalingGroupName: my-asg-news
-      LaunchConfigurationName: my-lcs1
+      LaunchConfigurationName: my-lc-new
       AvailabilityZones:
         - us-east-1a
       DesiredCapacity: 1
