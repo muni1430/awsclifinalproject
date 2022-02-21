@@ -195,9 +195,9 @@ Resources:
         Version: !GetAtt ASLC55LJA.LatestVersionNumber
       AvailabilityZones:
         - us-east-1a
-      DesiredCapacity: 1
-      MaxSize: 2
-      MinSize: 1
+      DesiredCapacity: 0
+      MaxSize: 0
+      MinSize: 0
       TargetGroupARNs:
         - !Ref ELBV2TG4A6L0
     Metadata:
