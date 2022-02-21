@@ -70,7 +70,7 @@ Resources:
       MasterUserPassword: muni1234
       DBInstanceClass: db.t2.micro
       DBName: cwmsdbss
-      DBInstanceIdentifier: rdsnews
+      DBInstanceIdentifier: rdsnews1
       VPCSecurityGroups:
         - sg-01361c1aff01f515a
       EngineVersion: 5.7
