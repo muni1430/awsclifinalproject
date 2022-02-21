@@ -167,7 +167,6 @@ Resources:
         Version: !GetAtt ASLC55LJA.LatestVersionNumber
       AvailabilityZones:
         - us-east-1a
-         - us-east-1a
       DesiredCapacity: 1
       MaxSize: 2
       MinSize: 1
