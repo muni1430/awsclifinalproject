@@ -153,7 +153,7 @@ Resources:
             sudo /opt/lampp/lampp restart
             sudo chmod 777 /opt/lampp/phpmyadmin/config.inc.php
             sudo echo '$cfg["Servers"][$i]["verbose"] = "Amazon RDS";' >> /opt/lampp/phpmyadmin/config.inc.php
-            sudo echo '$cfg["Servers"][$i]["host"] = "endpoint";' >> /opt/lampp/phpmyadmin/config.inc.php
+            sudo echo '$cfg["Servers"][$i]["host"] = "${endpoint}";' >> /opt/lampp/phpmyadmin/config.inc.php
             sudo echo '$cfg["Servers"][$i]["user"] = "admin";' >> /opt/lampp/phpmyadmin/config.inc.php
             sudo echo '$cfg["Servers"][$i]["password"] = "muni1234";' >> /opt/lampp/phpmyadmin/config.inc.php
             sudo echo '$cfg["Servers"][$i]["port"] = "3306";' >> /opt/lampp/phpmyadmin/config.inc.php
@@ -163,6 +163,7 @@ Resources:
             sudo /opt/lampp/lampp restart
             sudo apt install mysql-client-core-8.0
             sudo mysql -h ${endpoint} -u admin --password=muni1234 vpms < /awsclifinalproject/Vehicle parking management System project/SQL File/SQL\ File/vpmsdb.sql
+            - endpoint: !GetAtt RDSDBI32QQE.Endpoint.Address
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 355e45e0-9d36-49a7-8d8d-fc3b7f760b9c
