@@ -69,8 +69,8 @@ Resources:
       MasterUsername: admin
       MasterUserPassword: muni1234
       DBInstanceClass: db.t2.micro
-      DBName: cwmsdbss
-      DBInstanceIdentifier: rdsnews12
+      DBName: vpmss
+      DBInstanceIdentifier: rdsnewfinal
       VPCSecurityGroups:
         - sg-01361c1aff01f515a
       EngineVersion: 5.7
@@ -81,7 +81,7 @@ Resources:
   ELBV2LB1HUDC:
     Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
     Properties:
-      Name: my-load-balancer-news
+      Name:  my-load-balancer-new
       Subnets:
         - subnet-09e434f2a8b3b7e7c
         - subnet-03a83a9c26a79aeec
@@ -93,7 +93,7 @@ Resources:
   ELBV2TG4A6L0:
     Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
     Properties:
-      Name: my-target-group-news
+      Name: my-target-group-new
       Port: 80
       Protocol: TCP
       VpcId: vpc-0a77a4c6898363932
@@ -116,17 +116,19 @@ Resources:
       - ELBV2LB1HUDC
       - ELBV2TG4A6L0
   ASLC55LJA:
-    Type: 'AWS::AutoScaling::LaunchConfiguration'
-    Properties:
-      LaunchConfigurationName: new-onelc
-      ImageId: ami-04505e74c0741db8d
-      InstanceType: t2.micro
-      IamInstanceProfile: myiam_role
-      KeyName: newawskey
-      SecurityGroups:
-        - sg-01361c1aff01f515a
-      UserData:
-        'Fn::Base64': !Sub 
+    Type: AWS::EC2::LaunchTemplate
+    Properties: 
+      LaunchTemplateName: my-lc1
+      LaunchTemplateData: 
+        IamInstanceProfile:
+          Name:  myiam_role
+        ImageId:  ami-04505e74c0741db8d
+        InstanceType: t2.micro
+        KeyName:  newawskey
+        SecurityGroupIds:
+          - sg-01361c1aff01f515a
+        UserData:
+          'Fn::Base64': !Sub 
           - |
             #!/bin/bash
             sudo apt-get update -y
@@ -139,9 +141,8 @@ Resources:
             sudo rm -rf /opt/lampp/htdocs/*
             sudo chmod 777 /opt/lampp/htdocs
             sudo git clone https://github.com/muni1430/awsclifinalproject.git
-            sudo cp -r awsclifinalproject/Vehicle parking management System project/vpms/* /opt/lampp/htdocs
+            sudo cp -r awsclifinalproject/Vehicle parking management System project/vpms/includes/dbconnection.php/vpms/* /opt/lampp/htdocs
             sudo chmod 777 /opt/lampp/htdocs/includes/dbconnection.php
-            sudo chmod 777 /opt/lampp/htdocs/admin/includes/dbconnection.php
             sudo sed -i.bak 's/localhost/${endpoint}/g' /opt/lampp/htdocs/includes/dbconnection.php
             sudo sed -i.bak 's/localhost/${endpoint}/g' /opt/lampp/htdocs/admin/includes/dbconnection.php
             sudo chmod 777 /opt/lampp/etc/extra/httpd-xampp.conf
@@ -159,16 +160,39 @@ Resources:
             sudo chmod 400 /opt/lampp/phpmyadmin/config.inc.php
             sudo /opt/lampp/lampp restart
             sudo apt install mysql-client-core-8.0
-            mysql -h ${endpoint} -u admin --password=muni1234 cwmsdbss < /awsclifinalproject/Vehicle parking management System project/SQL File/SQL\ File/cwmsdbss.sql
+            sudo mysql -h ${endpoint} -u admin --password=muni1234 vpms < /awsclifinalproject/Vehicle parking management System project/SQL File/SQL\ File/vpmsdb.sql
           - endpoint: !GetAtt RDSDBI32QQE.Endpoint.Address
     Metadata:
       'AWS::CloudFormation::Designer':
         id: 355e45e0-9d36-49a7-8d8d-fc3b7f760b9c
+    DependsOn:
+      - RDSDBI32QQE
   ASASG3CEB8:
     Type: 'AWS::AutoScaling::AutoScalingGroup'
     Properties:
-      AutoScalingGroupName: my-asg-news
-      LaunchConfigurationName: new-onelc
+      AutoScalingGroupName: my-asg-new
+      LaunchTemplate:
+        LaunchTemplateName: my-lc1
+        Version: !GetAtt ASLC55LJA.LatestVersionNumber
+      AvailabilityZones:
+        - us-east-1a
+      DesiredCapacity: 1
+      MaxSize: 2
+      MinSize: 1
+      TargetGroupARNs:
+        - !Ref ELBV2TG4A6L0
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 1453d6ad-0801-4957-a2f6-c9cc5887b06b
+    DependsOn:
+      - ELBV2TG4A6L0
+  ASG2:
+    Type: 'AWS::AutoScaling::AutoScalingGroup'
+    Properties:
+      AutoScalingGroupName: my-asg2
+      LaunchTemplate:
+        LaunchTemplateName: my-lc1
+        Version: !GetAtt ASLC55LJA.LatestVersionNumber
       AvailabilityZones:
         - us-east-1a
       DesiredCapacity: 1
