@@ -125,9 +125,9 @@ Resources:
       KeyName: newawskey
       SecurityGroups:
         - sg-01361c1aff01f515a
-      UserData:
-       'Fn::Base64': !Sub 
-            |
+      "UserData": {
+       "Fn::Base64": {"Fn::Sub": "${UserDataParam}"}}
+            - |
             #!/bin/bash
             sudo apt-get update -y
             sudo apt-get upgrade -y
