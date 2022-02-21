@@ -139,7 +139,7 @@ Resources:
             sudo rm -rf /opt/lampp/htdocs/*
             sudo chmod 777 /opt/lampp/htdocs
             sudo git clone https://github.com/muni1430/awsclifinalproject.git
-            sudo cp -r awsclifinalproject/Vehicle parking management System project/vpms/includes/dbconnection.php/vpms/* /opt/lampp/htdocs
+            sudo cp -r awsclifinalproject/Vehicle parking management System project/vpms/* /opt/lampp/htdocs
             sudo chmod 777 /opt/lampp/htdocs/includes/dbconnection.php
             sudo sed -i.bak 's/localhost/${endpoint}/g' /opt/lampp/htdocs/includes/dbconnection.php
             sudo sed -i.bak 's/localhost/${endpoint}/g' /opt/lampp/htdocs/admin/includes/dbconnection.php
