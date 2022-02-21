@@ -169,7 +169,6 @@ Resources:
     Properties:
       AutoScalingGroupName: my-asg-news
       LaunchConfigurationName: new-onelc
-         Version: !GetAtt ASLC55LJA.LatestVersionNumber
       AvailabilityZones:
         - us-east-1a
       DesiredCapacity: 1
