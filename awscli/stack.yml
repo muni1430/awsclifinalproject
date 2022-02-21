@@ -128,15 +128,13 @@ Resources:
       UserData:
          'Fn::Base64' : !Sub 
           - |
-              #!/bin/bash -xe
-       
-          ARN_ID=${arn_id}
-          KEY=${key}
-        
-          echo $ARN_ID 
-          echo $KEY
-        - arn_id: !If [TestEnvironment, 'id1', 'id2']
-          key: !If [TestEnvironment, 'key1', 'key2']
+            #!/bin/bash -xe
+             ARN_ID=${arn_id}
+             KEY=${key}
+             echo $ARN_ID 
+             echo $KEY
+           - arn_id: !If [TestEnvironment, 'id1', 'id2']
+             key: !If [TestEnvironment, 'key1', 'key2']
             sudo apt-get update -y
             sudo apt-get upgrade -y
             sudo wget https://www.apachefriends.org/xampp-files/8.1.2/xampp-linux-x64-8.1.2-0-installer.run
