@@ -205,3 +205,18 @@ Resources:
         id: 1453d6ad-0801-4957-a2f6-c9cc5887b06b
     DependsOn:
       - ELBV2TG4A6L0
+       EC2SecurityGroup:
+        Type: "AWS::EC2::SecurityGroup"
+        Properties:
+            GroupDescription: "Database instances security group"
+            VpcId: !Ref VPC
+            SecurityGroupIngress: 
+              - 
+                CidrIp: "*.*.*.*/32"
+                FromPort: 3306
+                IpProtocol: "tcp"
+                ToPort: 3306
+            SecurityGroupEgress: 
+              - 
+                CidrIp: "0.0.0.0/0"
+                IpProtocol: "-1"
