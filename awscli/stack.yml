@@ -194,7 +194,7 @@ Resources:
         LaunchTemplateName: my-lc1
         Version: !GetAtt ASLC55LJA.LatestVersionNumber
       AvailabilityZones:
-        - us-east-1a
+        - us-east-1c
       DesiredCapacity: 0
       MaxSize: 0
       MinSize: 0
